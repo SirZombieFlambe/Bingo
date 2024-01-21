@@ -5,17 +5,16 @@ from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_ALIGN_VERTICAL
 
 
 def get_random_bingo_section():
-    greetings_file = "bingoBois.txt"  # Replace with your file path
-    with open(greetings_file, "r", encoding="utf-8") as file2:
-        greetings = file2.readlines()
-    file2.close()
-    # Choose a random greeting
-    random_greeting = random.choice(greetings)
-    return random_greeting
+    bingo_answers = "bingoBois.txt"  # Replace with your file path
+    with open(bingo_answers, "r", encoding="utf-8") as file:
+        answer = file.readlines()
+    file.close()
+
+    bingo_boi = random.choice(answer)
+    return bingo_boi
 
 
 def make_doc_table(table_info, docs_number):
-
     document = docx.Document()
     document.add_heading('\t\t\t\t\tLawrence Bingo', 0)
     sections = document.sections
@@ -51,9 +50,10 @@ def make_doc_table(table_info, docs_number):
 
     document.save(f'bingo_card{docs_number}.docx')
 
+
 def main():
     docs_number = input("How many Bingo Cards do you want: ")
-    for num in range(int(docs_number) - 1):
+    for num in range(int(docs_number)):
         bingo_card = []
 
         full_card = False
@@ -71,14 +71,8 @@ def main():
                 if card_size == 25:
                     full_card = True
 
+        make_doc_table(bingo_card, num + 1)
 
 
-        make_doc_table(bingo_card, num+1)
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-
     main()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
