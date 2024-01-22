@@ -14,9 +14,13 @@ def get_random_bingo_section():
     return bingo_boi
 
 
-def make_doc_table(table_info, docs_number):
+def make_doc_table(table_info, docs_number, title):
+
     document = docx.Document()
-    document.add_heading('\t\t\t\t\tLawrence Bingo', 0)
+
+    heading = document.add_heading(title, level=0)
+    heading.alignment = 1
+
     sections = document.sections
     for section in sections:
         section.top_margin = Cm(0.5)
@@ -52,7 +56,10 @@ def make_doc_table(table_info, docs_number):
 
 
 def main():
+    title = input("What is the bingo game's title? Ex Lawrence Bingo: ")
     docs_number = input("How many Bingo Cards do you want: ")
+
+
     for num in range(int(docs_number)):
         bingo_card = []
 
@@ -71,7 +78,7 @@ def main():
                 if card_size == 25:
                     full_card = True
 
-        make_doc_table(bingo_card, num + 1)
+        make_doc_table(bingo_card, num + 1, title)
 
 
 if __name__ == '__main__':
